@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "gopls", "pyright", "eslint" },
+				ensure_installed = { "lua_ls", "tsserver", "gopls", "pyright", "eslint", "clangd" },
 			})
 		end,
 	},
@@ -20,6 +20,11 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local util = require("lspconfig/util")
+			--  handlers
+			local handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+			}
 
 			local on_attach = function(client, bufnr)
 				local function opts(desc)
@@ -61,16 +66,14 @@ return {
 					opts("LSP: [P]roject [S]ymbols")
 				)
 				map("i", "<A-k>", vim.lsp.buf.signature_help, opts("LSP: Signature Documentation"))
-				--[[ if conf.signature and client.server_capabilities.signatureHelpProvider then
-			  require("nvchad.lsp.signature").setup(client, bufnr)
-			end ]]
 			end
-			--
+
 			-- LSP SETUP
 
 			-- lua_ls setup
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
+				handlers = handlers,
 				capabilities = capabilities,
 			})
 
@@ -85,6 +88,8 @@ return {
 
 			lspconfig.tsserver.setup({
 				on_attach = on_attach,
+
+				handlers = handlers,
 				capabilities = capabilities,
 				commands = {
 					OrganizeImports = {
@@ -105,26 +110,38 @@ return {
 			-- pyright setup
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
+
+				handlers = handlers,
 				capabilities = capabilities,
 
 				filetypes = { "python" },
 			})
 
+			-- clangd setup
+			lspconfig.clangd.setup({
+				on_attach = on_attach,
+				handlers = handlers,
+				capabilities = capabilities,
+			})
 			-- gopls setup
 			lspconfig.gopls.setup({
 				on_attach = on_attach,
+				handlers = handlers,
 				capabilities = capabilities,
 				cmd = { "gopls" },
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 				settings = {
 					gopls = {
+						experimentalPostfixCompletions = true,
 						completeUnimported = true,
 						usePlaceholders = true,
 						analyses = {
 							unusedparams = true,
 							nillness = true,
+							shadow = true,
 						},
+						staticcheck = true,
 					},
 				},
 			})

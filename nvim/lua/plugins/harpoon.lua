@@ -7,7 +7,11 @@ return {
 
 	config = function()
 		local harpoon = require("harpoon")
-		harpoon:setup({})
+		harpoon:setup({
+			settings = {
+				save_on_toggle = true,
+			},
+		})
 
 		-- basic telescope configuration
 		local conf = require("telescope.config").values
@@ -57,10 +61,10 @@ return {
 		end)
 
 		-- Toggle previous & next buffers stored within Harpoon list
-		vim.keymap.set("n", "<leader>hp", function()
+		vim.keymap.set("n", "<leader>p", function()
 			harpoon:list():prev()
 		end)
-		vim.keymap.set("n", "<leader>hn", function()
+		vim.keymap.set("n", "<leader>n", function()
 			harpoon:list():next()
 		end)
 	end,

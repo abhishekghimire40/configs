@@ -22,9 +22,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# make neovim the default text editor for this user
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # replaceing ls with eza 
 alias ls="eza --icons"
-alias vim="nvim"
 alias sdn="shutdown now"
 alias rb="reboot"
 #----cd aliases------
