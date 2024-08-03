@@ -11,7 +11,6 @@ $nodejs\
 $rust\
 $cmd_duration\
 $fill\
-$time\
 $line_break\
 $character"""
 
@@ -73,14 +72,14 @@ style = "bright-black"
 [fill]
 symbol = " "
 
-[time]
-disabled = false
-time_format = "%R"
-use_12hr =true
-style = "bold bright-black"
-format = '[$time]($style) '
-# format = '🕙[$time] ($style) '
-utc_time_offset = 'local'
+# [time]
+# disabled = false
+# time_format = "%R"
+# use_12hr =true
+# style = "bold bright-black"
+# format = '[$time]($style) '
+# # format = '🕙[$time] ($style) '
+# utc_time_offset = 'local'
 
 [c]
 symbol = " "
