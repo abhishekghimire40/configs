@@ -14,7 +14,7 @@ return {
 		map("n", "<leader>gaj", "<cmd> GoAddTag  <CR>", opts("Add json struct tags"))
 		map("n", "<leader>gay", "<cmd> GoAddTag  yaml<CR>", opts("Add yaml struct tags"))
 		map("n", "<leader>gie", "<cmd> GoIfErr <CR>", opts("Add if/err snippet"))
-		map("n", "<leader>gfs", "<cmd>   GoFillStruct<CR>", opts("Auto fill struct parameters"))
+		map("n", "<leader>gfs", "<cmd> GoFillStruct<CR>", opts("Auto fill struct parameters"))
 		map("n", "<leader>grj", "<cmd> GoRmTag json<CR>", opts("Remove json struct tags"))
 		map("n", "<leader>gry", "<cmd> GoRmTag yaml<CR>", opts("Remove yaml struct tags"))
 		map("n", "<leader>gct", "<cmd> GoClearTag <CR>", opts("Clear all struct tags"))

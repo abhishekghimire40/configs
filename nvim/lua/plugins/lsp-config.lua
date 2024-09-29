@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "gopls", "pyright", "eslint", "clangd" },
+				ensure_installed = { "lua_ls", "ts_ls", "gopls", "pyright", "eslint", "clangd" },
 			})
 		end,
 	},
@@ -86,7 +86,7 @@ return {
 				vim.lsp.buf.execute_command(params)
 			end
 
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				on_attach = on_attach,
 
 				handlers = handlers,
@@ -107,7 +107,6 @@ return {
 				},
 			})
 
-			-- pyright setup
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
 
@@ -115,6 +114,20 @@ return {
 				capabilities = capabilities,
 
 				filetypes = { "python" },
+				-- root_dir = vim.loop.cwd(),
+				settings = {
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							diagnosticMode = "openFilesOnly",
+							useLibraryCodeForTypes = true,
+							typeCheckingMode = "basic",
+							completeFunctionParens = true,
+							autoImportCompletions = true,
+							importFormat = "absolute",
+						},
+					},
+				},
 			})
 
 			-- clangd setup
@@ -146,10 +159,6 @@ return {
 				},
 			})
 
-			-- keybindings for lsp
-			--[[ vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {}) ]]
 		end,
 	},
 }
