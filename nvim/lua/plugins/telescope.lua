@@ -56,6 +56,14 @@ return {
 			-- Enable telescope fzf native, if installed
 			-- pcall(require("telescope").load_extension, "fzf")
 
+			-- Find only .env files
+			vim.keymap.set("n", "<leader>fe", function()
+				builtin.find_files({
+					find_command = { "rg", "--files", "--iglob", "*.env" },
+					hidden = true,
+				})
+			end, {})
+
 			-- find
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>fw", builtin.live_grep, {})

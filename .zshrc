@@ -27,6 +27,12 @@ export NVM_DIR="$HOME/.nvm"
 export EDITOR='nvim'
 export VISUAL='nvim'
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# fzf alias 
+alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
+
 # replaceing ls with eza 
 alias ls="eza --icons"
 alias sdn="shutdown now"
@@ -48,10 +54,11 @@ alias gcm="git commit -m"
 alias gpom="git push -u origin main"
 
 
+alias cat="bat"
 alias vim="nvim" 
 
 # go path
-export GOPATH=/home/abhishek/go
+export GOPATH=/home/abhishekghimire/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 #zoxide config
@@ -59,3 +66,23 @@ eval "$(zoxide init zsh)"
 
 #starship config
 eval "$(starship init zsh)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/abhishekghimire/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/abhishekghimire/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/abhishekghimire/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/abhishekghimire/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
