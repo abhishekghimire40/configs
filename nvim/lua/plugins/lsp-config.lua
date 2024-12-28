@@ -9,7 +9,15 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "gopls", "pyright", "eslint", "clangd" },
+				ensure_installed = {
+					"lua_ls",
+					"ts_ls",
+					"gopls",
+					"pyright",
+					"eslint",
+					"clangd",
+					"tailwindcss",
+				},
 			})
 		end,
 	},
@@ -69,13 +77,22 @@ return {
 			end
 
 			-- LSP SETUP
+			local servers = { "lua_ls", "tailwindcss", "eslint", "clangd" }
+
+			for _, lsp in ipairs(servers) do
+				lspconfig[lsp].setup({
+					on_attach = on_attach,
+					handlers = handlers,
+					capabilities = capabilities,
+				})
+			end
 
 			-- lua_ls setup
-			lspconfig.lua_ls.setup({
+			--[[ lspconfig.lua_ls.setup({
 				on_attach = on_attach,
 				handlers = handlers,
 				capabilities = capabilities,
-			})
+			}) ]]
 
 			-- configure typescript language server
 			local function organize_imports()
@@ -107,6 +124,20 @@ return {
 				},
 			})
 
+			-- tailwindcss
+			--[[ lspconfig.tailwindcss.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				handlers = handlers,
+			}) ]]
+
+			-- eslint
+			--[[ lspconfig.eslint.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				handlers = handlers,
+			}) ]]
+
 			lspconfig.pyright.setup({
 				on_attach = on_attach,
 
@@ -131,11 +162,12 @@ return {
 			})
 
 			-- clangd setup
-			lspconfig.clangd.setup({
+			--[[ lspconfig.clangd.setup({
 				on_attach = on_attach,
 				handlers = handlers,
 				capabilities = capabilities,
-			})
+			}) ]]
+
 			-- gopls setup
 			lspconfig.gopls.setup({
 				on_attach = on_attach,
@@ -158,7 +190,6 @@ return {
 					},
 				},
 			})
-
 		end,
 	},
 }

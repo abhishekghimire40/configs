@@ -2,7 +2,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
 		config = function()
 			-- telescope load and keymap
 			local builtin = require("telescope.builtin")
@@ -26,7 +26,8 @@ return {
 						i = {
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-j>"] = actions.move_selection_next,
-							["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							-- ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 							["<C-x>"] = actions.delete_buffer,
 							["<C-w>"] = actions.close,
 						},
@@ -55,6 +56,7 @@ return {
 
 			-- Enable telescope fzf native, if installed
 			-- pcall(require("telescope").load_extension, "fzf")
+			require("telescope").load_extension("fzf")
 
 			-- Find only .env files
 			vim.keymap.set("n", "<leader>fe", function()
