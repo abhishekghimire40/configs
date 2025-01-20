@@ -1,7 +1,7 @@
 vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+vim.cmd("set tabstop=4")
+vim.cmd("set softtabstop=4")
+vim.cmd("set shiftwidth=4")
 vim.cmd("set clipboard+=unnamedplus")
 
 vim.opt.smartindent = true
@@ -13,10 +13,11 @@ vim.opt.undofile = true
 vim.opt.swapfile = false
 -- vim.opt.updatetime = 50
 vim.opt.mouse = "a"
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "preview", "noselect" }
 
 vim.opt.textwidth = 120
 vim.opt.colorcolumn = { 120 }
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- always keep 8lines above/below cursor unless at beginning/End of file

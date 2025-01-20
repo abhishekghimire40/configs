@@ -8,7 +8,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
-    build = "make install_jsregexp"
+		build = "make install_jsregexp",
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -44,7 +44,7 @@ return {
 
 			cmp.setup({
 				completion = {
-					completeopt = "menu,menuone",
+					completeopt = "menu,menuone,preview,noselect",
 				},
 				snippet = {
 					expand = function(args)

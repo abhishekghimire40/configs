@@ -31,11 +31,14 @@ return {
 		config = function()
 			local dap = require("dap")
 			-- dap keymaps
-			vim.keymap.set("n", "<Leader>db", function()
+			vim.keymap.set("n", "<leader>db", function()
 				dap.toggle_breakpoint()
 			end)
-			vim.keymap.set("n", "<Leader>ds", function()
+			vim.keymap.set("n", "<leader>ds", function()
 				dap.continue()
+			end)
+			vim.keymap.set("n", "<leader>dc", function()
+				dap.close()
 			end)
 		end,
 	},

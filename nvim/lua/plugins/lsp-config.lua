@@ -1,7 +1,10 @@
 return {
+
+	-- { "nvim-java/nvim-java" },
 	{
 		"williamboman/mason.nvim",
 		config = function()
+			-- require("java").setup()
 			require("mason").setup()
 		end,
 	},
@@ -17,7 +20,19 @@ return {
 					"eslint",
 					"clangd",
 					"tailwindcss",
+					"jsonls",
+					"jdtls",
 				},
+			})
+		end,
+	},
+	-- mason nvim dap utilizes mason to automatically ensure debug adapters you want installed are installed, mason-lspconfig will not automatically install debug adapters for us
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		config = function()
+			-- ensure the java debug adapter is installed
+			require("mason-nvim-dap").setup({
+				ensure_installed = { "java-debug-adapter", "java-test" },
 			})
 		end,
 	},
@@ -74,10 +89,20 @@ return {
 					opts("LSP: [P]roject [S]ymbols")
 				)
 				map("i", "<A-k>", vim.lsp.buf.signature_help, opts("LSP: Signature Documentation"))
+				-- Enable Inalay Hints if the lsp server supports it
+				if client.server_capabilities.inlayHintProvider then
+					vim.lsp.inlay_hint.enable(true)
+				end
 			end
 
 			-- LSP SETUP
-			local servers = { "lua_ls", "tailwindcss", "eslint", "clangd" }
+			local servers = {
+				"lua_ls",
+				"tailwindcss",
+				"eslint",
+				"clangd",
+				"jsonls",
+			}
 
 			for _, lsp in ipairs(servers) do
 				lspconfig[lsp].setup({
