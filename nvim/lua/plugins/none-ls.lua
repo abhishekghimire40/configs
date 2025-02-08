@@ -23,14 +23,14 @@ return {
 					null_ls.builtins.formatting.goimports_reviser,
 					null_ls.builtins.formatting.golines,
 					-- # FORMATTING #
-					null_ls.builtins.formatting.google_java_format.with({ extra_args = { "--aosp" } }),
+					--[[ null_ls.builtins.formatting.google_java_format.with({ extra_args = { "--aosp" } }),
 					-- # DIAGNOSTICS #
 					null_ls.builtins.diagnostics.checkstyle.with({
 						extra_args = {
 							"-c",
 							vim.fn.expand("~/dotfiles/config/google_checks.xml"),
 						},
-					}),
+					}), ]]
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
