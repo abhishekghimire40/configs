@@ -1,0 +1,90 @@
+-- return {
+--   "folke/noice.nvim",
+--   opts = function(_, opts)
+--     opts.presets = {
+--       command_palette = {
+--         views = {
+--           cmdline_popup = {
+--             position = {
+--               row = "50%",
+--               col = "50%",
+--             },
+--             size = {
+--               min_width = 60,
+--               width = "auto",
+--               height = "auto",
+--             },
+--           },
+--           cmdline_popupmenu = {
+--             position = {
+--               row = "67%",
+--               col = "50%",
+--             },
+--           },
+--         },
+--       },
+--     }
+--     opts.lsp.signature = {
+--       opts = { size = { max_height = 15 } },
+
+-- return {
+--   "folke/noice.nvim",
+--   opts = function(_, opts)
+--     opts.presets = {
+--       bottom_search = true,
+--       long_message_to_split = true,
+--       inc_rename = true,
+--       lsp_doc_border = true,
+--     }
+--
+--     -- Calculate vertical center and menu position
+--     local center_row = math.floor(vim.o.lines * 0.45)
+--     local popup_row = center_row + 3 -- push menu below cmdline popup
+--
+--     opts.views = {
+--       -- Command line input popup
+--       cmdline_popup = {
+--         position = {
+--           row = center_row,
+--           col = "50%",
+--         },
+--         size = {
+--           min_width = 60,
+--           width = "auto",
+--           height = "auto",
+--         },
+--         border = {
+--           style = "rounded",
+--         },
+--         win_options = {
+--           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+--         },
+--       },
+--
+--       -- Completion popup menu just below cmdline_popup
+--       cmdline_popupmenu = {
+--         relative = "editor",
+--         position = {
+--           row = popup_row,
+--           col = "50%",
+--         },
+--         size = {
+--           width = 60,
+--           height = "auto",
+--         },
+--         border = {
+--           style = "rounded",
+--         },
+--         win_options = {
+--           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+--         },
+--       },
+--     }
+--   end,
+--  }
+return {
+  "folke/noice.nvim",
+  opts = function(_, opts)
+    opts.presets.lsp_doc_border = true
+  end,
+}

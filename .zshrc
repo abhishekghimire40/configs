@@ -27,8 +27,8 @@ export NVM_DIR="$HOME/.nvm"
 export EDITOR='nvim'
 export VISUAL='nvim'
 
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+# Source fzf key bindings and fuzzy completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # fzf alias 
 alias inv='nvim $(fzf -m --preview="bat --color=always {}")'
@@ -38,8 +38,8 @@ alias ls="eza --icons"
 alias sdn="shutdown now"
 alias rb="reboot"
 #----cd aliases------
+alias cdb="cd -"
 alias cd="z"
-alias cdb="z -"
 alias cd1="z .."
 alias cd2="z ../.."
 alias cd3="z ../../.."
@@ -55,12 +55,30 @@ alias gcm="git commit -m"
 alias gpom="git push -u origin main"
 
 
-alias cat="bat"
+alias cat="batcat"
 alias vim="nvim" 
 
 # go path
-export GOPATH=/home/abhishekghimire/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOBIN:$HOME/anaconda3/bin
+
+# export PATH=$PATH:$GOPATH:$GOBIN:$HOME/anaconda3/bin
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/abhishek-ghimire/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/abhishek-ghimire/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/abhishek-ghimire/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/abhishek-ghimire/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 #zoxide config
 eval "$(zoxide init zsh)"
@@ -68,22 +86,4 @@ eval "$(zoxide init zsh)"
 #starship config
 eval "$(starship init zsh)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/abhishekghimire/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/abhishekghimire/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/abhishekghimire/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/abhishekghimire/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
