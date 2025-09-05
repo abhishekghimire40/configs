@@ -1,39 +1,90 @@
--- return {}
+-- return {
+--   "folke/noice.nvim",
+--   opts = function(_, opts)
+--     opts.presets = {
+--       command_palette = {
+--         views = {
+--           cmdline_popup = {
+--             position = {
+--               row = "50%",
+--               col = "50%",
+--             },
+--             size = {
+--               min_width = 60,
+--               width = "auto",
+--               height = "auto",
+--             },
+--           },
+--           cmdline_popupmenu = {
+--             position = {
+--               row = "67%",
+--               col = "50%",
+--             },
+--           },
+--         },
+--       },
+--     }
+--     opts.lsp.signature = {
+--       opts = { size = { max_height = 15 } },
+
+-- return {
+--   "folke/noice.nvim",
+--   opts = function(_, opts)
+--     opts.presets = {
+--       bottom_search = true,
+--       long_message_to_split = true,
+--       inc_rename = true,
+--       lsp_doc_border = true,
+--     }
+--
+--     -- Calculate vertical center and menu position
+--     local center_row = math.floor(vim.o.lines * 0.45)
+--     local popup_row = center_row + 3 -- push menu below cmdline popup
+--
+--     opts.views = {
+--       -- Command line input popup
+--       cmdline_popup = {
+--         position = {
+--           row = center_row,
+--           col = "50%",
+--         },
+--         size = {
+--           min_width = 60,
+--           width = "auto",
+--           height = "auto",
+--         },
+--         border = {
+--           style = "rounded",
+--         },
+--         win_options = {
+--           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+--         },
+--       },
+--
+--       -- Completion popup menu just below cmdline_popup
+--       cmdline_popupmenu = {
+--         relative = "editor",
+--         position = {
+--           row = popup_row,
+--           col = "50%",
+--         },
+--         size = {
+--           width = 60,
+--           height = "auto",
+--         },
+--         border = {
+--           style = "rounded",
+--         },
+--         win_options = {
+--           winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+--         },
+--       },
+--     }
+--   end,
+--  }
 return {
-	"folke/noice.nvim",
-	event = "VeryLazy",
-	opts = {
-		-- add any options here
-	},
-	dependencies = {
-		"MunifTanjim/nui.nvim",
-		"rcarriga/nvim-notify",
-	},
-	config = function()
-		require("noice").setup({
-			lsp = {
-				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-				},
-				hover = {
-					enabled = false,
-				},
-				signature = {
-					enabled = false,
-				},
-			},
-			-- you can enable a preset for easier configuration
-			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				-- command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
-		})
-		vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice message" })
-	end,
+  "folke/noice.nvim",
+  opts = function(_, opts)
+    opts.presets.lsp_doc_border = true
+  end,
 }

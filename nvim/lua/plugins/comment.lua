@@ -1,21 +1,17 @@
+-- ~/.config/nvim/lua/plugins/comment.lua
 return {
-	"numToStr/Comment.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+  "numToStr/Comment.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  config = function()
+    require("Comment").setup()
 
-	config = function()
-		-- gain access to the comment plugins functions
-		local comment = require("Comment")
-		-- gain access to tsx commenting plugins functions
-		local ts_context_comment_string = require("ts_context_commentstring.integrations.comment_nvim")
+    -- Optional: map <leader>/ manually (if you want to override LazyVim defaults)
+    vim.keymap.set("n", "<leader>/", function()
+      require("Comment.api").toggle.linewise.current()
+    end, { desc = "Toggle Comment (line)", noremap = true, silent = true })
 
-		-- setup the comment plugin to use ts_context_comment_string to check if we are attempting to comment out a tsx element
-		-- if we are use ts_context_comment_string to comment it out
-		comment.setup({
-			pre_hook = ts_context_comment_string.create_pre_hook(),
-		})
-	end,
-	opts = {
-		-- add any options here
-	},
+    vim.keymap.set("v", "<leader>/", function()
+      require("Comment.api").toggle.linewise(vim.fn.visualmode())
+    end, { desc = "Toggle Comment (visual)", noremap = true, silent = true })
+  end,
 }
